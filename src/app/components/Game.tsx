@@ -82,6 +82,11 @@ export default function Game() {
     setCurrentMove(nextMove);
   }
 
+  function flushProgress(): void {
+    setCurrentMove(0);
+    setHistory([Array(9).fill(null)]);
+  }
+
   const moves = history.map((squares, move) => {
     let description;
     if (move > 0) {
@@ -98,6 +103,9 @@ export default function Game() {
 
   return (
     <div className="game">
+      <div>
+        <button className={styles.gameInfoButton} onClick={flushProgress}>Clear gameboard</button>
+      </div>
       <div className="game-board">
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
       </div>
